@@ -2,7 +2,11 @@ package problems
 
 import "testing"
 
-func TestSameFrequency(t *testing.T) {
+func TestSameFrequencyUsingValidAnagram(t *testing.T) {
+	testSameFrequency(t, SameFrequencyUsingValidAnagram)
+}
+
+func testSameFrequency(t *testing.T, fn func(int, int) bool) {
 	cases := []struct {
 		n, m int
 		want bool
@@ -12,7 +16,7 @@ func TestSameFrequency(t *testing.T) {
 		{22, 222, false},
 	}
 	for _, c := range cases {
-		got := SameFrequency(c.n, c.m)
+		got := fn(c.n, c.m)
 		if got != c.want {
 			t.Errorf("SameFrequency(%d, %d) == %t, want %t", c.n, c.m, got, c.want)
 		}
