@@ -8,9 +8,9 @@ func TestCountUniqueValues(t *testing.T) {
 		want int
 	}{
 		{[]int{1, 1, 1, 1, 2}, 2},
-		{[]int{1, 2, 3, 4, 4, 4, 7, 12, 13}, 2},
+		{[]int{1, 2, 3, 4, 4, 4, 7, 12, 13}, 7},
 		{[]int{}, 0},
-		{[]int{-2, -1, -1, 0, 1}, 2},
+		{[]int{-2, -1, -1, 0, 1}, 4},
 	}
 	for _, c := range cases {
 		got := CountUniqueValues(c.arr)
