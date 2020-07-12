@@ -59,6 +59,19 @@ func Factorial(n int) int {
 	return n * Factorial(n-1)
 }
 
+// Fib returns nth number in the Fibonacci sequence.
+func Fib(n int) int {
+	var fn func(int, int) int
+	fn = func(curr, next int) int {
+		if n == 1 {
+			return curr
+		}
+		n--
+		return fn(next, curr+next)
+	}
+	return fn(1, 1)
+}
+
 // FindLongestSubstring returns the length of the longest substring with all distinct characters.
 func FindLongestSubstring(s string) int {
 	lookup := make(map[byte]bool)

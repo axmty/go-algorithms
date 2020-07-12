@@ -74,6 +74,23 @@ func TestFactorial(t *testing.T) {
 	}
 }
 
+func TestFib(t *testing.T) {
+	cases := []struct {
+		n    int
+		want int
+	}{
+		{4, 3},
+		{10, 55},
+		{28, 317811},
+	}
+	for _, c := range cases {
+		got := Fib(c.n)
+		if got != c.want {
+			t.Errorf("Fib(%d) == %d, want %d", c.n, got, c.want)
+		}
+	}
+}
+
 func TestFindLongestSubstring(t *testing.T) {
 	cases := []struct {
 		s    string
