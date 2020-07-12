@@ -56,6 +56,27 @@ func TestCountUniqueValues(t *testing.T) {
 	}
 }
 
+func TestFindLongestSubstring(t *testing.T) {
+	cases := []struct {
+		s    string
+		want int
+	}{
+		{"", 0},
+		{"rithmschool", 7},
+		{"thisisawesome", 6},
+		{"thecatinthehat", 7},
+		{"bbbbbb", 1},
+		{"longestsubstring", 8},
+		{"thisishowwedoit", 6},
+	}
+	for _, c := range cases {
+		got := FindLongestSubstring(c.s)
+		if got != c.want {
+			t.Errorf("FindLongestSubstring(%q) == %d, want %d", c.s, got, c.want)
+		}
+	}
+}
+
 func TestIsSubsequence(t *testing.T) {
 	cases := []struct {
 		a, b string

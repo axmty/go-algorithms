@@ -51,6 +51,28 @@ func CountUniqueValues(arr []int) int {
 	return count
 }
 
+// FindLongestSubstring returns the length of the longest substring with all distinct characters.
+func FindLongestSubstring(s string) int {
+	lookup := make(map[byte]bool)
+	longest := 0
+	start, end := 0, 0
+	for {
+		if end < len(s) && !lookup[s[end]] {
+			lookup[s[end]] = true
+			end++
+			if end-start > longest {
+				longest = end - start
+			}
+		} else if end < len(s) && lookup[s[end]] {
+			lookup[s[start]] = false
+			start++
+		} else {
+			break
+		}
+	}
+	return longest
+}
+
 // IsSubsequence determines if string a is a subsequence of string b.
 func IsSubsequence(a, b string) bool {
 	i, j := 0, 0
