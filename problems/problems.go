@@ -144,6 +144,21 @@ func Pow(n, pow int) int {
 	return n * Pow(n, pow-1)
 }
 
+// Product returns the product of all the elements of arr.
+func Product(arr []int) int {
+	if len(arr) == 0 {
+		return 0
+	}
+	var fn func(int) int
+	fn = func(i int) int {
+		if i == len(arr) {
+			return 1
+		}
+		return arr[i] * fn(i+1)
+	}
+	return fn(0)
+}
+
 // SameFrequency determines if integers n and m have the same frequency of digits.
 // It uses the function in the same package.
 func SameFrequency(n, m int) bool {

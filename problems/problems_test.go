@@ -178,6 +178,22 @@ func TestPow(t *testing.T) {
 	}
 }
 
+func TestProduct(t *testing.T) {
+	cases := []struct {
+		arr  []int
+		want int
+	}{
+		{[]int{1, 2, 3}, 6},
+		{[]int{1, 2, 3, 10}, 60},
+	}
+	for _, c := range cases {
+		got := Product(c.arr)
+		if got != c.want {
+			t.Errorf("Product(%v) == %d, want %d", c.arr, got, c.want)
+		}
+	}
+}
+
 func TestSameFrequency(t *testing.T) {
 	cases := []struct {
 		n, m int
