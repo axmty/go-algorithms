@@ -56,6 +56,24 @@ func TestCountUniqueValues(t *testing.T) {
 	}
 }
 
+func TestFactorial(t *testing.T) {
+	cases := []struct {
+		n    int
+		want int
+	}{
+		{1, 1},
+		{2, 2},
+		{4, 24},
+		{7, 5040},
+	}
+	for _, c := range cases {
+		got := Factorial(c.n)
+		if got != c.want {
+			t.Errorf("Factorial(%d) == %d, want %d", c.n, got, c.want)
+		}
+	}
+}
+
 func TestFindLongestSubstring(t *testing.T) {
 	cases := []struct {
 		s    string

@@ -51,6 +51,14 @@ func CountUniqueValues(arr []int) int {
 	return count
 }
 
+// Factorial returns !n.
+func Factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * Factorial(n-1)
+}
+
 // FindLongestSubstring returns the length of the longest substring with all distinct characters.
 func FindLongestSubstring(s string) int {
 	lookup := make(map[byte]bool)
