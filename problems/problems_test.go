@@ -74,7 +74,7 @@ func TestIsSubsequence(t *testing.T) {
 	}
 }
 
-func TestMaxSubarraySum(t *testing.T) {
+func TestMaxSubArraySum(t *testing.T) {
 	cases := []struct {
 		arr []int
 		n   int
@@ -88,10 +88,36 @@ func TestMaxSubarraySum(t *testing.T) {
 		{[]int{2, 3}, 3, 0, false},
 	}
 	for _, c := range cases {
-		got, ok := MaxSubarraySum(c.arr, c.n)
+		got, ok := MaxSubArraySum(c.arr, c.n)
 		if got != c.out && ok != c.ok {
 			t.Errorf("MaxSubarraySum(%v, %d) == (%d, %t), want (%d, %t)",
 				c.arr, c.n, got, ok, c.out, c.ok)
+		}
+	}
+}
+
+func TestMinSubArrayLen(t *testing.T) {
+	cases := []struct {
+		arr  []int
+		n    int
+		want int
+	}{
+		{[]int{}, 5, 0},
+		{[]int{3}, 4, 0},
+		{[]int{3}, 3, 1},
+		{[]int{2, 3, 1, 2, 4, 3}, 7, 2},
+		{[]int{2, 1, 6, 5, 4}, 9, 2},
+		{[]int{3, 1, 7, 11, 2, 9, 8, 21, 62, 33, 19}, 52, 1},
+		{[]int{1, 4, 16, 22, 5, 7, 8, 9, 10}, 39, 3},
+		{[]int{1, 4, 16, 22, 5, 7, 8, 9, 10}, 55, 5},
+		{[]int{4, 3, 3, 8, 1, 2, 3}, 11, 2},
+		{[]int{1, 4, 16, 22, 5, 7, 8, 9, 10}, 95, 0},
+	}
+	for _, c := range cases {
+		got := MinSubArrayLen(c.arr, c.n)
+		if got != c.want {
+			t.Errorf("MinSubArrayLen(%v, %d) == %d, want %d",
+				c.arr, c.n, got, c.want)
 		}
 	}
 }

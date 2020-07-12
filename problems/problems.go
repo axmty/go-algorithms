@@ -1,6 +1,8 @@
 package problems
 
-import "strconv"
+import (
+	"strconv"
+)
 
 // AreThereDuplicates determines if there are duplicates in the params.
 func AreThereDuplicates(params ...interface{}) bool {
@@ -19,18 +21,18 @@ func AreThereDuplicates(params ...interface{}) bool {
 func AveragePair(arr []int, target float32) bool {
 	sorted := make([]int, len(arr))
 	copy(sorted, arr)
-	begin, end := 0, len(sorted)-1
-	for begin < end {
-		avg := (float32(sorted[begin]) + float32(sorted[end])) / 2
+	start, end := 0, len(sorted)-1
+	for start < end {
+		avg := (float32(sorted[start]) + float32(sorted[end])) / 2
 		if avg == target {
 			break
 		} else if avg < target {
-			begin++
+			start++
 		} else {
 			end--
 		}
 	}
-	return begin < end
+	return start < end
 }
 
 // CountUniqueValues counts the unique values in the array arr.
@@ -61,8 +63,8 @@ func IsSubsequence(a, b string) bool {
 	return i == len(a)
 }
 
-// MaxSubarraySum finds the maximum sum of a subarray in array arr, with length n.
-func MaxSubarraySum(arr []int, n int) (int, bool) {
+// MaxSubArraySum finds the maximum sum of a subarray in array arr, with length n.
+func MaxSubArraySum(arr []int, n int) (int, bool) {
 	if n <= 0 || len(arr) < n {
 		return 0, false
 	}
@@ -72,14 +74,36 @@ func MaxSubarraySum(arr []int, n int) (int, bool) {
 		max += arr[end]
 	}
 	sum := max
-	for begin, end := 1, end+1; end < len(arr); begin, end = begin+1, end+1 {
-		sum -= arr[begin]
+	for start, end := 1, end+1; end < len(arr); start, end = start+1, end+1 {
+		sum -= arr[start]
 		sum += arr[end]
 		if sum > max {
 			max = sum
 		}
 	}
 	return max, true
+}
+
+// MinSubArrayLen returns the minimal length of a contiguous subarray of which
+// the sum is greater than or equal to n.
+func MinSubArrayLen(arr []int, n int) int {
+	start, end, min, sum := 0, 0, 0, 0
+	for {
+		if sum < n && end < len(arr) {
+			sum += arr[end]
+			end++
+		} else if sum >= n {
+			if min == 0 || end-start < min {
+				min = end - start
+			}
+			sum -= arr[start]
+			start++
+
+		} else {
+			break
+		}
+	}
+	return min
 }
 
 // SameFrequency determines if integers n and m have the same frequency of digits.
