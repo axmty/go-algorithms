@@ -137,8 +137,25 @@ func TestMinSubArrayLen(t *testing.T) {
 	for _, c := range cases {
 		got := MinSubArrayLen(c.arr, c.n)
 		if got != c.want {
-			t.Errorf("MinSubArrayLen(%v, %d) == %d, want %d",
-				c.arr, c.n, got, c.want)
+			t.Errorf("MinSubArrayLen(%v, %d) == %d, want %d", c.arr, c.n, got, c.want)
+		}
+	}
+}
+
+func TestPow(t *testing.T) {
+	cases := []struct {
+		n    int
+		pow  int
+		want int
+	}{
+		{2, 0, 1},
+		{2, 2, 4},
+		{2, 4, 16},
+	}
+	for _, c := range cases {
+		got := Pow(c.n, c.pow)
+		if got != c.want {
+			t.Errorf("Pow(%d, %d) == %d, want %d", c.n, c.pow, got, c.want)
 		}
 	}
 }

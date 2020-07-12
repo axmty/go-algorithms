@@ -128,6 +128,14 @@ func MinSubArrayLen(arr []int, n int) int {
 	return min
 }
 
+// Pow returns n power pow.
+func Pow(n, pow int) int {
+	if pow == 0 {
+		return 1
+	}
+	return n * Pow(n, pow-1)
+}
+
 // SameFrequency determines if integers n and m have the same frequency of digits.
 // It uses the function in the same package.
 func SameFrequency(n, m int) bool {
