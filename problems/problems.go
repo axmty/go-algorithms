@@ -183,6 +183,21 @@ func MinSubArrayLen(arr []int, n int) int {
 	return min
 }
 
+// NestedEvenSum returns the sum of all nested even integers in arr.
+func NestedEvenSum(arr []interface{}) int {
+	if len(arr) == 0 {
+		return 0
+	}
+	v := 0
+	switch elem := arr[0].(type) {
+	case []interface{}:
+		v = NestedEvenSum(elem)
+	case int:
+		v = elem
+	}
+	return v + NestedEvenSum(arr[1:])
+}
+
 // Pow returns n power pow.
 func Pow(n, pow int) int {
 	if pow == 0 {
@@ -229,11 +244,11 @@ func SameFrequency(n, m int) bool {
 }
 
 // SomeRecursive determines if at least one value in arr verifies the given predicate pre.
-func SomeRecursive(arr []interface{}, pre func(interface{}) bool) bool {
+func SomeRecursive(arr []interface{}, predicate func(interface{}) bool) bool {
 	if len(arr) == 0 {
 		return false
 	}
-	return pre(arr[0]) || SomeRecursive(arr[1:], pre)
+	return predicate(arr[0]) || SomeRecursive(arr[1:], predicate)
 }
 
 // ValidAnagram determines if string b is an anagram of string a.

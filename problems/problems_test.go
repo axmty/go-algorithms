@@ -242,6 +242,25 @@ func TestMinSubArrayLen(t *testing.T) {
 	}
 }
 
+func TestNestedEvenSum(t *testing.T) {
+	cases := []struct {
+		arr  []interface{}
+		want int
+	}{
+		// [1 'a' 3 ['b' 5]] => 9
+		{[]interface{}{1, 'a', 3, []interface{}{'b', 5}}, 9},
+		// [[1 2]] => 3
+		{[]interface{}{[]interface{}{1, 2}}, 3},
+	}
+	for _, c := range cases {
+		got := NestedEvenSum(c.arr)
+		if got != c.want {
+			t.Errorf("NestedEvenSum(%v) == %d, want %d", c.arr, got, c.want)
+			continue
+		}
+	}
+}
+
 func TestPow(t *testing.T) {
 	cases := []struct {
 		n    int
