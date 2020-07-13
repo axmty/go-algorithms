@@ -41,6 +41,21 @@ func TestAveragePair(t *testing.T) {
 	}
 }
 
+func TestCapitalizeFirst(t *testing.T) {
+	cases := []struct {
+		arr  []string
+		want []string
+	}{
+		{[]string{"car", "taco", "banana"}, []string{"Car", "Taco", "Banana"}},
+	}
+	for _, c := range cases {
+		got := CapitalizeFirst(c.arr)
+		if !reflect.DeepEqual(got, c.want) {
+			t.Errorf("CapitalizeFirst(%v) == %v, want %v", c.arr, got, c.want)
+		}
+	}
+}
+
 func TestCountUniqueValues(t *testing.T) {
 	cases := []struct {
 		arr  []int
@@ -121,13 +136,15 @@ func TestFlatten(t *testing.T) {
 		want []interface{}
 	}{
 		// [1 2 3 [4 5]] => [1 2 3 4 5]
-		{[]interface{}{1, 2, 3, []interface{}{4, 5}}, []interface{}{1, 2, 3, 4, 5}},
+		{
+			[]interface{}{1, 2, 3, []interface{}{4, 5}},
+			[]interface{}{1, 2, 3, 4, 5},
+		},
 		// [1 [2 [3 4] [[5]]]] => [1 2 3 4 5]
-		{[]interface{}{1, []interface{}{2, []interface{}{3, 4}, []interface{}{[]interface{}{5}}}}, []interface{}{1, 2, 3, 4, 5}},
-		// [[1] [2] [3]] => [1 2 3]
-		{[]interface{}{[]interface{}{1}, []interface{}{2}, []interface{}{3}}, []interface{}{1, 2, 3}},
-		// [[[[1] [[[2]]] [[[[[[[3]]]]]]]]]] => [1 2 3]
-		{[]interface{}{[]interface{}{[]interface{}{[]interface{}{1}, []interface{}{[]interface{}{[]interface{}{2}}}, []interface{}{[]interface{}{[]interface{}{[]interface{}{[]interface{}{[]interface{}{[]interface{}{3}}}}}}}}}}, []interface{}{1, 2, 3}},
+		{
+			[]interface{}{1, []interface{}{2, []interface{}{3, 4}, []interface{}{[]interface{}{5}}}},
+			[]interface{}{1, 2, 3, 4, 5},
+		},
 	}
 	for _, c := range cases {
 		got := Flatten(c.arr)

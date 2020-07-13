@@ -2,6 +2,7 @@ package problems
 
 import (
 	"strconv"
+	"strings"
 )
 
 // AreThereDuplicates determines if there are duplicates in the params.
@@ -33,6 +34,14 @@ func AveragePair(arr []int, target float32) bool {
 		}
 	}
 	return start < end
+}
+
+// CapitalizeFirst returns the strings in arr with their first letter capitalized.
+func CapitalizeFirst(arr []string) []string {
+	if len(arr) == 0 {
+		return []string{}
+	}
+	return append([]string{strings.Title(arr[0])}, CapitalizeFirst(arr[1:])...)
 }
 
 // CountUniqueValues counts the unique values in the array arr.
