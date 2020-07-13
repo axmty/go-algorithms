@@ -94,6 +94,19 @@ func FindLongestSubstring(s string) int {
 	return longest
 }
 
+// Flatten recursively flattens array or slice elements in arr.
+func Flatten(arr []interface{}) []interface{} {
+	if len(arr) == 0 {
+		return []interface{}{}
+	}
+	switch elem := arr[0].(type) {
+	case []interface{}:
+		return append(Flatten(elem), Flatten(arr[1:])...)
+	default:
+		return append([]interface{}{elem}, Flatten(arr[1:])...)
+	}
+}
+
 // IsPalindrome if string s is a palindrome.
 func IsPalindrome(s string) bool {
 	var fn func([]rune) bool

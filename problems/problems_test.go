@@ -1,6 +1,7 @@
 package problems
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -110,6 +111,29 @@ func TestFindLongestSubstring(t *testing.T) {
 		got := FindLongestSubstring(c.s)
 		if got != c.want {
 			t.Errorf("FindLongestSubstring(%q) == %d, want %d", c.s, got, c.want)
+		}
+	}
+}
+
+func TestFlatten(t *testing.T) {
+	cases := []struct {
+		arr  []interface{}
+		want []interface{}
+	}{
+		// [1 2 3 [4 5]] => [1 2 3 4 5]
+		{[]interface{}{1, 2, 3, []interface{}{4, 5}}, []interface{}{1, 2, 3, 4, 5}},
+		// [1 [2 [3 4] [[5]]]] => [1 2 3 4 5]
+		{[]interface{}{1, []interface{}{2, []interface{}{3, 4}, []interface{}{[]interface{}{5}}}}, []interface{}{1, 2, 3, 4, 5}},
+		// [[1] [2] [3]] => [1 2 3]
+		{[]interface{}{[]interface{}{1}, []interface{}{2}, []interface{}{3}}, []interface{}{1, 2, 3}},
+		// [[[[1] [[[2]]] [[[[[[[3]]]]]]]]]] => [1 2 3]
+		{[]interface{}{[]interface{}{[]interface{}{[]interface{}{1}, []interface{}{[]interface{}{[]interface{}{2}}}, []interface{}{[]interface{}{[]interface{}{[]interface{}{[]interface{}{[]interface{}{[]interface{}{3}}}}}}}}}}, []interface{}{1, 2, 3}},
+	}
+	for _, c := range cases {
+		got := Flatten(c.arr)
+		if !reflect.DeepEqual(got, c.want) {
+			t.Errorf("Flatten(%v) == %v, want %v", c.arr, got, c.want)
+			continue
 		}
 	}
 }
