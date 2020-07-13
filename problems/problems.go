@@ -206,6 +206,14 @@ func SameFrequency(n, m int) bool {
 	return ValidAnagram(strconv.Itoa(n), strconv.Itoa(m))
 }
 
+// SomeRecursive determines if at least one value in arr verifies the given predicate pre.
+func SomeRecursive(arr []interface{}, pre func(interface{}) bool) bool {
+	if len(arr) == 0 {
+		return false
+	}
+	return pre(arr[0]) || SomeRecursive(arr[1:], pre)
+}
+
 // ValidAnagram determines if string b is an anagram of string a.
 func ValidAnagram(a, b string) bool {
 	if len(a) != len(b) {

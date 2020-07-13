@@ -1,6 +1,8 @@
 package problems
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestAreThereDuplicates(t *testing.T) {
 	cases := []struct {
@@ -264,6 +266,33 @@ func TestSameFrequency(t *testing.T) {
 		got := SameFrequency(c.n, c.m)
 		if got != c.want {
 			t.Errorf("SameFrequency(%d, %d) == %t, want %t", c.n, c.m, got, c.want)
+		}
+	}
+}
+
+func TestSomeRecursive(t *testing.T) {
+	isOdd := func(i interface{}) bool {
+		return i.(int)%2 == 1
+	}
+	moreThanTen := func(i interface{}) bool {
+		return i.(int) > 10
+	}
+	cases := []struct {
+		arr      []interface{}
+		funcName string
+		pre      func(interface{}) bool
+		want     bool
+	}{
+		{[]interface{}{1, 2, 3, 4}, "isOdd", isOdd, true},
+		{[]interface{}{4, 6, 8, 9}, "isOdd", isOdd, true},
+		{[]interface{}{4, 6, 8}, "isOdd", isOdd, false},
+		{[]interface{}{4, 6, 8}, "isOdd", moreThanTen, false},
+	}
+	for _, c := range cases {
+		got := SomeRecursive(c.arr, c.pre)
+		if got != c.want {
+			t.Errorf("SomeRecursive(%v, %s) == %t, want %t",
+				c.arr, c.funcName, got, c.want)
 		}
 	}
 }
