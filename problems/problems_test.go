@@ -112,6 +112,28 @@ func TestFindLongestSubstring(t *testing.T) {
 	}
 }
 
+func TestIsPalindrome(t *testing.T) {
+	cases := []struct {
+		s    string
+		want bool
+	}{
+		{"awesome", false},
+		{"foobar", false},
+		{"tacocat", true},
+		{"taccat", true},
+		{"amanaplanacanalpanama", true},
+		{"amanaplanacanalpandemonium", false},
+		{"维基百百基维", true},
+		{"维基百维基百", false},
+	}
+	for _, c := range cases {
+		got := IsPalindrome(c.s)
+		if got != c.want {
+			t.Errorf("IsPalindrome(%q) == %t, want %t", c.s, got, c.want)
+		}
+	}
+}
+
 func TestIsSubsequence(t *testing.T) {
 	cases := []struct {
 		a, b string
@@ -219,6 +241,7 @@ func TestReverse(t *testing.T) {
 		{"awesome", "emosewa"},
 		{"rithmschool", "loohcsmhtir"},
 		{"维基百科:关于中文维基百科", "科百基维文中于关:科百基维"},
+		{"维", "维"},
 	}
 	for _, c := range cases {
 		got := Reverse(c.s)

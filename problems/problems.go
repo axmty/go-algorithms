@@ -94,6 +94,18 @@ func FindLongestSubstring(s string) int {
 	return longest
 }
 
+// IsPalindrome if string s is a palindrome.
+func IsPalindrome(s string) bool {
+	var fn func([]rune) bool
+	fn = func(runes []rune) bool {
+		if len(runes) <= 1 {
+			return true
+		}
+		return runes[0] == runes[len(runes)-1] && fn(runes[1:len(runes)-1])
+	}
+	return fn([]rune(s))
+}
+
 // IsSubsequence determines if string a is a subsequence of string b.
 func IsSubsequence(a, b string) bool {
 	i, j := 0, 0
@@ -174,15 +186,18 @@ func Product(arr []int) int {
 
 // Reverse returns s in reverse.
 func Reverse(s string) string {
-	runes := []rune(s)
-	switch len(s) {
-	case 0:
-		return ""
-	case 1:
-		return string(runes[0])
-	default:
-		return Reverse(string(runes[1:])) + string(runes[0])
+	var fn func([]rune) string
+	fn = func(runes []rune) string {
+		switch len(runes) {
+		case 0:
+			return ""
+		case 1:
+			return string(runes[0])
+		default:
+			return Reverse(string(runes[1:])) + string(runes[0])
+		}
 	}
+	return fn([]rune(s))
 }
 
 // SameFrequency determines if integers n and m have the same frequency of digits.
