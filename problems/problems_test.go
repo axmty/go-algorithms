@@ -211,6 +211,23 @@ func TestProduct(t *testing.T) {
 	}
 }
 
+func TestReverse(t *testing.T) {
+	cases := []struct {
+		s    string
+		want string
+	}{
+		{"awesome", "emosewa"},
+		{"rithmschool", "loohcsmhtir"},
+		{"维基百科:关于中文维基百科", "科百基维文中于关:科百基维"},
+	}
+	for _, c := range cases {
+		got := Reverse(c.s)
+		if got != c.want {
+			t.Errorf("Reverse(%q) == %q, want %q", c.s, got, c.want)
+		}
+	}
+}
+
 func TestSameFrequency(t *testing.T) {
 	cases := []struct {
 		n, m int

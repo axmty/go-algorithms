@@ -172,6 +172,19 @@ func Product(arr []int) int {
 	return fn(0)
 }
 
+// Reverse returns s in reverse.
+func Reverse(s string) string {
+	runes := []rune(s)
+	switch len(s) {
+	case 0:
+		return ""
+	case 1:
+		return string(runes[0])
+	default:
+		return Reverse(string(runes[1:])) + string(runes[0])
+	}
+}
+
 // SameFrequency determines if integers n and m have the same frequency of digits.
 // It uses the function in the same package.
 func SameFrequency(n, m int) bool {
