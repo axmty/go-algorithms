@@ -11,6 +11,10 @@ func TestBubble(t *testing.T) {
 	runTest(t, Bubble)
 }
 
+func TestInsertion(t *testing.T) {
+	runTest(t, Insertion)
+}
+
 func TestSelection(t *testing.T) {
 	runTest(t, Selection)
 }

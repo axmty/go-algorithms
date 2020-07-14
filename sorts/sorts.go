@@ -14,6 +14,15 @@ func Bubble(arr []int) {
 	}
 }
 
+// Insertion sorts arr using insertion sort algorithm.
+func Insertion(arr []int) {
+	for i := 0; i < len(arr); i++ {
+		for j := i; j > 0 && arr[j-1] > arr[j]; j-- {
+			arr[j], arr[j-1] = arr[j-1], arr[j]
+		}
+	}
+}
+
 // Selection sorts arr using selection sort algorithm.
 func Selection(arr []int) {
 	for i := 0; i < len(arr)-1; i++ {
