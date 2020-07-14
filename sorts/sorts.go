@@ -13,3 +13,8 @@ func Bubble(arr []int) {
 		}
 	}
 }
+
+// Selection sorts arr using selection sort algorithm.
+func Selection(arr []int) {
+
+}
