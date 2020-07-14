@@ -3,6 +3,7 @@ package sorts
 import (
 	"reflect"
 	"runtime"
+	"strings"
 	"testing"
 )
 
@@ -15,7 +16,7 @@ func TestSelection(t *testing.T) {
 }
 
 func runTest(t *testing.T, sortFunc func([]int)) {
-	funcName := runtime.FuncForPC(reflect.ValueOf(sortFunc).Pointer()).Name()
+	funcName := getFuncName(sortFunc)
 	cases := []struct {
 		arr  []int
 		want []int
@@ -32,4 +33,9 @@ func runTest(t *testing.T, sortFunc func([]int)) {
 			t.Errorf("%s(%v) => %v, want %v", funcName, arg, c.arr, c.want)
 		}
 	}
+}
+
+func getFuncName(sortFunc func([]int)) string {
+	fullFuncName := runtime.FuncForPC(reflect.ValueOf(sortFunc).Pointer()).Name()
+	return fullFuncName[strings.LastIndex(fullFuncName, ".")+1:]
 }
